@@ -1,0 +1,74 @@
+<!-- Section 1 -->
+<section class="relative bg-white">
+    <!-- nav goes here  -->
+    <nav class="bg-gray-100">
+        <div class='max-w-8xl mx-auto sm:px-3'>
+            <div class="flex justify-between">
+                <!-- logo -->
+                <div class="flex">
+                    <div class=" ml-8 mr-8 py-6">
+                      <a class='font-bold text-2xl' href="{% url 'homepage' %}">BitsSatoshi.</a>
+                    </div>
+                    <!-- primary navbar -->
+                    <div class=" hidden md:flex space-x-3 flex items-center ">
+                        <a href="" class="text-gray-700 text-gray-700 hover:underline font-medium  text-xl">Blog</a>
+                        <a href="" class="text-gray-700 text-gray-700 hover:underline font-medium  text-xl">News</a>
+                        <a href="" class="text-gray-700 text-gray-700 hover:underline font-medium  text-xl">Indicators</a>
+                    </div>
+                </div>
+
+                <!-- secondary Navbar -->
+                <div class=" hidden md:flex items-center space-x-5 mr-4">
+                    <a href="{% url 'login' %}" class=' text-2xl'>Login</a>
+                    <a href="{% url 'signup' %}" class="  py-2 font-bold px-3 bg-logo_color-400 text-white rounded-lg hover:bg-logo_hover_color">Signup</a>
+                </div>
+
+                <!-- MObile Things Goes Here -->
+                    <div class="md:hidden flex items-center mr-4">
+                        <!-- Mobile Button -->
+                        <button class='mobile-menu-btn'>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
+                        </svg>
+                    </button>
+                    </div>
+                
+            </div>
+        </div>
+        
+    <!-- mobile Menu -->
+    <div class="md:hidden hidden mobile-menu">
+
+        <ul>
+            <li><a href="" class="block py-2 mb-2  text-center px-2 hover:bg-gray-400">Blog</a></li>
+            <li><a href="" class=" block mb-2 py-2  px-2 text-center hover:bg-gray-400">News</a></li>
+            <li><a href="" class=" block mb-2 py-2  px-2 text-center hover:bg-gray-400">Indicators</a></li>
+
+            <br>
+            <div class='flex justify-center flex-row'>
+            <li><a href="{% url 'login' %}" class=" block mb-2 py-2  rounded-md font-bold px-2 text-center hover:bg-gray-400">Login</a></li>
+            <li><a href="{% url 'signup' %}" class=" block mb-2 py-2 font-bold px-2 text-center rounded-md bg-logo_color-400 hover:bg-gray-400">Signup</a></li>
+            </div>
+            
+        </ul>
+        <!-- <a href="" class="block py-2 text-center px-2 hover:bg-gray-300">Blog</a>
+        <a href="" class=" block py-2 px-2 text-center hover:bg-gray-300">Learn</a> -->
+    </div>
+ </nav>
+
+ <script>
+    //grab the things
+    const mbtn = document.querySelector('button.mobile-menu-btn');
+    const menu = document.querySelector('.mobile-menu');
+
+    //add evenet listener
+    mbtn.addEventListener('click', ()=>{
+        menu.classList.toggle('hidden');
+    });
+
+</script>
+
+
+</section>
+
+

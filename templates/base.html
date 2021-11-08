@@ -5,9 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'css/tailwind.css' %}">
+    <!-- AlpineJS Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/2.8.0/alpine.js"></script>
     <title>BitsSatoshi</title>
 </head>
 <body>
+    {% include 'core/includes/navbar.html' %}
     {% block content %}
 
     {% endblock content %}
