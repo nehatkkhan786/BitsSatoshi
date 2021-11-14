@@ -18,10 +18,22 @@
                 </div>
 
                 <!-- secondary Navbar -->
+
+                {% if request.user.is_authenticated %}
                 <div class=" hidden md:flex items-center space-x-5 mr-4">
-                    <a href="{% url 'login' %}" class=' text-2xl'>Login</a>
-                    <a href="{% url 'signup' %}" class="  py-2 font-bold px-3 bg-logo_color-400 text-white rounded-lg hover:bg-logo_hover_color">Signup</a>
+                    <a href="{% url 'dashboard' %}" class=' text-2xl'>Dashboard</a>
+                    <a href="{% url 'logout' %}" class=' text-2xl'>Logout</a>
                 </div>
+                {% else %}
+                <div class=" hidden md:flex items-center space-x-5 mr-4">
+                <a href="{% url 'login' %}" class=' text-2xl'>Login</a>
+                <a href="{% url 'signup' %}" class="  py-2 font-bold px-3 bg-logo_color-400 text-white rounded-lg hover:bg-logo_hover_color">Signup</a>
+                </div>
+                {% endif %}
+                    
+                
+                    
+               
 
                 <!-- MObile Things Goes Here -->
                     <div class="md:hidden flex items-center mr-4">
@@ -45,9 +57,24 @@
             <li><a href="" class=" block mb-2 py-2  px-2 text-center hover:bg-gray-400">Indicators</a></li>
 
             <br>
+            
+            
+            {% if request.user.is_authenticated %}
             <div class='flex justify-center flex-row'>
-            <li><a href="{% url 'login' %}" class=" block mb-2 py-2  rounded-md font-bold px-2 text-center hover:bg-gray-400">Login</a></li>
-            <li><a href="{% url 'signup' %}" class=" block mb-2 py-2 font-bold px-2 text-center rounded-md bg-logo_color-400 hover:bg-gray-400">Signup</a></li>
+                <li><a href="{% url 'dashboard' %}" class=" block mb-2 py-2 font-bold px-2 text-center rounded-md bg-logo_color-400 hover:bg-gray-400">Dashboard</a></li>
+                <li><a href="{% url 'logout' %}" class=" block mb-2 py-2  rounded-md font-bold px-2 text-center hover:bg-gray-400">Logout</a></li>
+            </div>
+
+            {% else %}
+
+            <div class='flex justify-center flex-row'>
+                <li><a href="{% url 'login' %}" class=" block mb-2 py-2  rounded-md font-bold px-2 text-center hover:bg-gray-400">Login</a></li>
+                <li><a href="{% url 'signup' %}" class=" block mb-2 py-2 font-bold px-2 text-center rounded-md bg-logo_color-400 hover:bg-gray-400">Signup</a></li>
+            </div>
+            {% endif %}
+                
+            
+            
             </div>
             
         </ul>

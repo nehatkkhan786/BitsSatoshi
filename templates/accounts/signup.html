@@ -23,20 +23,26 @@
                             {% csrf_token %}
 
                         <div class="relative">
-                            <label class="absolute px-2 ml-2 -mt-3 font-medium text-gray-600 bg-white">Username</label>
-                            <input type="text" name='username' class="block w-full px-4 py-4 mt-2 text-base placeholder-gray-400 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-black" placeholder="Username">
+                            <label class="absolute px-2 ml-2 -mt-3 font-medium text-gray-600 bg-white">First Name</label>
+                            <input type="text" name='first_name' class="block w-full px-4 py-4 mt-2 text-base placeholder-gray-400 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-black" placeholder="Fist Name">
                         </div>
+
+                        <div class="relative my-5">
+                            <label class="absolute px-2 ml-2 -mt-3 font-medium text-gray-600 bg-white"> Last Name</label>
+                            <input type="text" name='last_name' class="block w-full px-4 py-4 mt-2 text-base placeholder-gray-400 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-black" placeholder="Last Name">
+                        </div>
+
                         <div class="relative my-5">
                             <label class="absolute px-2 ml-2 -mt-3 font-medium text-gray-600 bg-white"> Email</label>
                             <input type="email" name='email' class="block w-full px-4 py-4 mt-2 text-base placeholder-gray-400 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-black" placeholder="salman@gmail.com">
                         </div>
                         <div class="relative my-5">
                             <label class="absolute px-2 ml-2 -mt-3 font-medium text-gray-600 bg-white">Password</label>
-                            <input type="text" name='password1' class="block w-full px-4 py-4 mt-2 text-base placeholder-gray-400 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-black" placeholder="password">
+                            <input type="password" name='password1' class="block w-full px-4 py-4 mt-2 text-base placeholder-gray-400 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-black" placeholder="password">
                         </div>
                         <div class="relative my-5">
                             <label class="absolute px-2 ml-2 -mt-3 font-medium text-gray-600 bg-white">Confirm Password</label>
-                            <input type="text" name='password2' class="block w-full px-4 py-4 mt-2 text-base placeholder-gray-400 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-black" placeholder="Confirm Password">
+                            <input type="password" name='password2' class="block w-full px-4 py-4 mt-2 text-base placeholder-gray-400 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-black" placeholder="Confirm Password">
                         </div>
                         <div class="relative my-5">
                            <button type='submit' class='w-full'><a class="inline-block w-full px-5 py-4 text-xl font-medium text-center text-white transition duration-200 bg-logo_color-400 rounded-lg hover:bg- ease">Submit</a></button> 
