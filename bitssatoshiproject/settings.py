@@ -138,8 +138,8 @@ AUTH_USER_MODEL = 'accounts.CustomUser' # new
 # Email Configurations
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'nehatkhan82@gmail.com'
+EMAIL_HOST = 'smtpout.secureserver.net'
+EMAIL_HOST_USER = 'connect@bitssatoshi.com'
 EMAIL_HOST_PASSWORD = 'barbi78692'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 

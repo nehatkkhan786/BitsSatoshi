@@ -67,9 +67,9 @@ class SignUpView(View):
                     send_mail = EmailMessage(mail_subject, message, to=[email])
                     print(send_mail)
                     send_mail.send()
-
+                    messages.success(request, "Account Created! We have sent you an email to verify your Account.")
                     print('user created')
-                    return redirect('homepage')
+                    return redirect('account_created')
 
                 else:
                     user = CustomUser.objects.create_user(first_name = first_name, last_name=last_name, email=email, password=password1, username=username)
@@ -86,7 +86,7 @@ class SignUpView(View):
                     print(send_mail)
                     send_mail.send()
                     print('user created without recommended_by_profile')
-                    return redirect('homepage')
+                    return redirect('account_created')
         else:
             messages.error(request, "Password Didnt Match")
             return redirect('signup')
@@ -106,10 +106,10 @@ def EmailVerification(request, uidb64, token):
 		user.is_active = True
 		user.save()
 		messages.success(request, 'Thank You! Your account is successfully activated.')
-		return redirect('login')
+		return redirect('account_verified')
 	else:
 		messages.error(request, 'Sorry something went wrong!')
-		return redirect('login')
+		return redirect('signup')
 
 
 
@@ -212,3 +212,12 @@ class CreateNewPasswordView(View):
 			messages.error(request, 'Password Does Not Match')
 			return redirect('create_new_password')
 
+
+class AccountCreatedView(View):
+    def get(self, request, *args, **kwargs):
+        return render(request, 'accounts/account_created.html')
+
+
+class AccountVerifiedView(View):
+    def get(self, request, *args, **kwargs):
+        return render(request, 'accounts/account_verified.html')

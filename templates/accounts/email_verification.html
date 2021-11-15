@@ -1,9 +1,14 @@
 {% autoescape off %}
 
 
-Hi {{user.first_name}}
 
-Please click on the below link to verify your email address. 
+Hi {{user.first_name}},
+
+We just need to verify your email address before you can access BitsSatoshi Portal.
+
+Verify your email address by clicking the link below
 http://{{domain}}{% url 'email_verification' uidb64=uid token=token%}
+
+Thanks! &#8211; The [BitsSatoshi] team
 
 {% endautoescape %}
