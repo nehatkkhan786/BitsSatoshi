@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import SignUpView, LoginView, EmailVerification, DashboardView, PasswordResetView,PasswordResetEmailView, CreateNewPasswordView, LogoutView, AccountCreatedView, AccountVerifiedView
+from .views import SignUpView, LoginView, EmailVerification, DashboardView, PasswordResetView,PasswordResetEmailView, CreateNewPasswordView, LogoutView, AccountCreatedView, AccountVerifiedView, RecommendedView
 
 
 urlpatterns = [
@@ -17,4 +17,5 @@ urlpatterns = [
 
     path('account_created/', AccountCreatedView.as_view(), name ='account_created'),
     path('account_verified/', AccountVerifiedView.as_view(), name ='account_verified'),
+    path('recommended/', RecommendedView.as_view(), name= 'recommended'),
     ]

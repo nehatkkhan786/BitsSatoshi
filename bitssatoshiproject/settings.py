@@ -40,6 +40,7 @@ INSTALLED_APPS = [
 
     'coreapp.apps.CoreappConfig',
     'accounts.apps.AccountsConfig',
+    'airdrop.apps.AirdropConfig',
 ]
 
 MIDDLEWARE = [

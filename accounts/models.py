@@ -65,7 +65,6 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 		return True
 
 
-
 class Profile(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     code = models.CharField(max_length=12, blank=True)
@@ -77,4 +76,5 @@ class Profile(models.Model):
         if self.code == "":
             code = generate_code()
             self.code =code
-        super().save(*args, **kwargs)
+       	super().save(*args, **kwargs)
+	

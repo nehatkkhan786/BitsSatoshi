@@ -221,3 +221,7 @@ class AccountCreatedView(View):
 class AccountVerifiedView(View):
     def get(self, request, *args, **kwargs):
         return render(request, 'accounts/account_verified.html')
+
+class RecommendedView(View):
+    def get(self, request, *args, **kwargs):
+        return render(request , 'accounts/recommended.html')
