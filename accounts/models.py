@@ -66,15 +66,26 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
 
 class Profile(models.Model):
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    code = models.CharField(max_length=12, blank=True)
-    recommended_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True, related_name='ref_by')
-    updated_at = models.DateTimeField(auto_now=True)
-    created_at = models.DateTimeField(auto_now_add=True)
+	user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+	code = models.CharField(max_length=12, blank=True)
+	recommended_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True, related_name='ref_by')
+	updated_at = models.DateTimeField(auto_now=True)
+	created_at = models.DateTimeField(auto_now_add=True)
 
-    def save(self, *args, **kwargs):
-        if self.code == "":
-            code = generate_code()
-            self.code =code
-       	super().save(*args, **kwargs)
+	def save(self, *args, **kwargs):
+		if self.code == "":
+			code = generate_code()
+			self.code =code
+		super().save(*args, **kwargs)
 	
+	def __str__(self):
+		return self.user.email
+
+	def get_recommended_profile(self):
+		qs = Profile.objects.all()
+
+		my_recs = []
+		for profile in qs:
+			if profile.recommended_by == self.user:
+				my_recs.append(profile)
+		return my_recs

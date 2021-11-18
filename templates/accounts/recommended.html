@@ -3,7 +3,7 @@
 
 {% block content %}
 <div class="flex flex-col text-left py-10 container items-center">
-  <h1 class='font-bold text-2xl mb-10 text-logo_color-400'>Recommended Users</h1>
+  
     <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
       <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
         <div
@@ -17,24 +17,39 @@
           <table class="min-w-full divide-y divide-gray-200">
             <tbody class="bg-white divide-y divide-gray-200">
               <tr>
-                <td class="px-6 py-4 whitespace-nowrap">
-                  <div class="flex items-center">
-                    <div class="flex-shrink-0 h-10 w-10">
-                      <img
-                        class="h-10 w-10 rounded-full"
-                        src="{% static 'images/default.jpeg' %}"
-                      />
-                    </div>
-                    <div class="ml-4">
-                      <div class="text-sm font-medium text-gray-900">
-                        Flora Wu
+                
+                {% if my_recs %}
+                    
+                    {% for recs in my_recs %}
+                    <td class="px-6 py-4 whitespace-nowrap">
+                      <div class="flex items-center">
+    
+                        <div class="flex-shrink-0 h-10 w-10">
+                          <img
+                            class="h-10 w-10 rounded-full"
+                            src="{% static 'images/default.jpeg' %}"
+                          />
+                        </div>
+    
+                        <div class="ml-4">
+                          <div class="text-sm font-medium text-gray-900">
+                            {{recs.user.first_name}} {{recs.user.last_name}}
+                          </div>
+                          <div class="text-sm text-gray-500">
+                            {{recs.user}}
+                          </div>
+                        </div>
+    
                       </div>
-                      <div class="text-sm text-gray-500">
-                        flora.wu@example.com
-                      </div>
-                    </div>
-                  </div>
-                </td>
+                    </td>
+                    {% endfor %}
+                      
+
+                {% else %}
+                <h1 class='font-bold text-2xl mb-10 text-logo_color-400'>No Recommended Users</h1>
+                {% endif %}
+                  
+             
               </tr>
 
               <!-- More people... -->

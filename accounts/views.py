@@ -16,6 +16,9 @@ from django.core.mail import EmailMessage
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 
+import uuid 
+
+
 
 # Create your views here.
 
@@ -44,48 +47,53 @@ class SignUpView(View):
 
         if password1==password2:
             if CustomUser.objects.filter(email=email).exists():
-                    messages.error(request, 'Email already is use')
+                messages.error(request,"mail already is use")
+                return redirect('signup')
             else:
-                if profile_id is not None:
-                    recommended_by_profile = CustomUser.objects.get(id=profile_id)
-                    instance = CustomUser.objects.create_user(first_name =first_name, last_name=last_name, email=email, password=password1, username=username)
-                    instance.save()
-                    print('usersaved')
-                    registered_user = CustomUser.objects.get(id=instance.id)
-                    registered_profile = Profile.objects.get(user=registered_user)
-                    registered_profile.recommended_by = recommended_by_profile
-                    registered_profile.save()
-
-                    current_site = get_current_site(request)
-                    mail_subject = "Account Activation"
-                    message = render_to_string("accounts/email_verification.html", {
-                        'user': instance, 
-                        'domain': current_site,
-                        'uid': urlsafe_base64_encode(force_bytes(instance.pk)),
-                        'token': default_token_generator.make_token(instance)
-                    })
-                    send_mail = EmailMessage(mail_subject, message, to=[email])
-                    print(send_mail)
-                    send_mail.send()
-                    messages.success(request, "Account Created! We have sent you an email to verify your Account.")
-                    print('user created')
-                    return redirect('account_created')
-
+                if CustomUser.objects.filter(username=username).exists():
+                    print("User already exists")
+                    messages.error(request, "Username Already Exisits")
+                    return redirect('signup')
                 else:
-                    user = CustomUser.objects.create_user(first_name = first_name, last_name=last_name, email=email, password=password1, username=username)
-                    user.save()
-                    current_site = get_current_site(request)
-                    mail_subject = "Account Activation"
-                    message = render_to_string("accounts/email_verification.html", {
-                        'user': user, 
-                        'domain': current_site,
-                        'uid': urlsafe_base64_encode(force_bytes(user.pk)),
-                        'token': default_token_generator.make_token(user),
-                    })
-                    send_mail = EmailMessage(mail_subject, message, to=[email])
-                    print(send_mail)
-                    send_mail.send()
-                    print('user created without recommended_by_profile')
+                    if profile_id is not None:
+                        recommended_by_profile = CustomUser.objects.get(id=profile_id)
+                        instance = CustomUser.objects.create_user(first_name =first_name, last_name=last_name, email=email, password=password1, username=username)
+                        instance.save()
+                        print('usersaved')
+                        registered_user = CustomUser.objects.get(id=instance.id)
+                        registered_profile = Profile.objects.get(user=registered_user)
+                        registered_profile.recommended_by = recommended_by_profile
+                        registered_profile.save()
+
+                        current_site = get_current_site(request)
+                        mail_subject = "Account Activation"
+                        message = render_to_string("accounts/email_verification.html", {
+                            'user': instance, 
+                            'domain': current_site,
+                            'uid': urlsafe_base64_encode(force_bytes(instance.pk)),
+                            'token': default_token_generator.make_token(instance)
+                        })
+                        send_mail = EmailMessage(mail_subject, message, to=[email])
+                        print(send_mail)
+                        send_mail.send()
+                        print('user created')
+                        return redirect('account_created')
+
+                    else:
+                        user = CustomUser.objects.create_user(first_name = first_name, last_name=last_name, email=email, password=password1, username=username)
+                        user.save()
+                        current_site = get_current_site(request)
+                        mail_subject = "Account Activation"
+                        message = render_to_string("accounts/email_verification.html", {
+                            'user': user, 
+                            'domain': current_site,
+                            'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+                            'token': default_token_generator.make_token(user),
+                        })
+                        send_mail = EmailMessage(mail_subject, message, to=[email])
+                        print(send_mail)
+                        send_mail.send()
+                        print('user created without recommended_by_profile')
                     return redirect('account_created')
         else:
             messages.error(request, "Password Didnt Match")
@@ -105,7 +113,6 @@ def EmailVerification(request, uidb64, token):
 	if user is not None and default_token_generator.check_token(user, token):
 		user.is_active = True
 		user.save()
-		messages.success(request, 'Thank You! Your account is successfully activated.')
 		return redirect('account_verified')
 	else:
 		messages.error(request, 'Sorry something went wrong!')
@@ -124,7 +131,6 @@ class LoginView(View):
         user = auth.authenticate(email=email, password=password)
         if user is not None:
             auth.login(request, user)
-            messages.success(request, "You are successfully Log in")
             print("You are successfully Log in")
             return redirect('dashboard')
         else:
@@ -137,13 +143,16 @@ class LogoutView(LoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):
         logout(request)
         messages.success(request, "You are successfully Logout")
-        return redirect('homepage')
+        return redirect('login')
 
 
 
 class DashboardView(LoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):
-        return render(request, 'accounts/dashboard.html')
+        profile = Profile.objects.get(user = self.request.user)
+        my_recs = profile.get_recommended_profile()
+        total_recs = len(my_recs)
+        return render(request, 'accounts/dashboard.html', {'total_recs':total_recs})
 
 
 
@@ -222,6 +231,8 @@ class AccountVerifiedView(View):
     def get(self, request, *args, **kwargs):
         return render(request, 'accounts/account_verified.html')
 
-class RecommendedView(View):
+class RecommendedView(LoginRequiredMixin,View):
     def get(self, request, *args, **kwargs):
-        return render(request , 'accounts/recommended.html')
+        profile = Profile.objects.get(user = self.request.user)
+        my_recs = profile.get_recommended_profile()
+        return render(request , 'accounts/recommended.html', {'my_recs':my_recs})
