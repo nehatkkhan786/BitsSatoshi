@@ -144,6 +144,8 @@ EMAIL_HOST_USER = 'connect@bitssatoshi.com'
 EMAIL_HOST_PASSWORD = 'barbi78692'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
+DEFAULT_FROM_EMAIL = 'BitsSatoshi <connect@bitssatoshi.com>'
+
 
 
 try:

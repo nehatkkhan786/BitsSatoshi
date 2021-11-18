@@ -67,6 +67,7 @@ class SignUpView(View):
 
                         current_site = get_current_site(request)
                         mail_subject = "Account Activation"
+                    
                         message = render_to_string("accounts/email_verification.html", {
                             'user': instance, 
                             'domain': current_site,
