@@ -4,14 +4,14 @@
 
 {% block content %}
 <div class="bg-gray-200 font-sans h-screen w-full flex flex-row justify-center items-center">
-   <div class="card w-100 mx-auto bg-white  shadow-xl hover:shadow">
+   <div class="card  w-98 mx-auto bg-white  shadow-xl hover:shadow">
       <img class="w-32 mx-auto rounded-full -mt-20 border-8 border-white" src="{% static 'images/default.jpeg' %}" alt="">
       <div class="text-center mt-2 text-3xl font-medium">
          {{request.user.first_name}} {{request.user.last_name}} 
       </div>
       <div class="text-center mt-2 font-light text-sm">{{request.user.email}}</div>
       
-      <div class="px-6 text-center mt-2 font-light text-sm">
+      <div class="px-6 text-center mt-2 font-light object-fill md:text-sm lg:text-sm text-xs">
         <p>
           Referal Link- 
         </p>
