@@ -4,7 +4,7 @@
 
 {% block content %}
 <div class="bg-gray-200 font-sans h-screen w-full flex flex-row justify-center items-center">
-   <div class="card w-96 mx-auto bg-white  shadow-xl hover:shadow">
+   <div class="card w-100 mx-auto bg-white  shadow-xl hover:shadow">
       <img class="w-32 mx-auto rounded-full -mt-20 border-8 border-white" src="{% static 'images/default.jpeg' %}" alt="">
       <div class="text-center mt-2 text-3xl font-medium">
          {{request.user.first_name}} {{request.user.last_name}} 
@@ -13,8 +13,9 @@
       
       <div class="px-6 text-center mt-2 font-light text-sm">
         <p>
-          Referal Link- https://www.bitssatoshi.com/accounts/signup/{{user.profile.code}}
+          Referal Link- 
         </p>
+        <p>https://www.bitssatoshi.com/accounts/signup/{{user.profile.code}}</p>
       </div>
       <hr class="mt-8">
       <div class="flex p-4">
