@@ -23,4 +23,5 @@ urlpatterns = [
     path('', include('coreapp.urls')),
     path('accounts/', include('accounts.urls')),
     path('airdrop/', include('airdrop.urls')),
+    path('nft/', include('nft.urls'),)
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

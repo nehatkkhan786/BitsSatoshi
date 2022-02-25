@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'coreapp.apps.CoreappConfig',
     'accounts.apps.AccountsConfig',
     'airdrop.apps.AirdropConfig',
+    'nft.apps.NftConfig',
 ]
 
 MIDDLEWARE = [
